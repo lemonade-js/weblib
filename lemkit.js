@@ -6,7 +6,7 @@
                                      
 */
 
-const lemkit = {
+window.lemkit = {
     getNum(min, max) {
         return Math.random() * (max - min) + min;
     },
@@ -39,5 +39,20 @@ const lemkit = {
                 return i;
             }
         }
+    },
+
+    async wait(seconds) {
+        return new Promise(resolve => {
+            let remaining = seconds;
+    
+            const countdown = setInterval(() => {
+                remaining--;
+    
+                if (remaining <= 0) {
+                    clearInterval(countdown);
+                    resolve();
+                }
+            }, 1000);
+        });
     }
 };
