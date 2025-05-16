@@ -1,8 +1,4 @@
-function deleteCookie(key) {
-    document.cookie = escape(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-}
-
-const cookiemgr = {
+window.cookiemgr = {
     get(name) {
         let key = name + '=';
         let cookies = document.cookie.split(';');
@@ -24,10 +20,10 @@ const cookiemgr = {
     set(name, value, expiration) {
         const date = new Date(expiration);
 
-        document.cookie = `${escape(name)}=${escape(value)}; path=/; ${expiration ? `expires=${date.toUTCString};` : ''}`;
+        document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; path=/; ${expiration ? `expires=${date.toUTCString};` : ''}`;
     },
 
     delete(name) {
-        document.cookie = escape(name) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+        document.cookie = encodeURIComponent(name) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
     }
 };
